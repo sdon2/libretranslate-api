@@ -1,6 +1,6 @@
 <?php
 
-namespace OdooAPILaravel;
+namespace LibreTranslateLaravel;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
