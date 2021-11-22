@@ -1,0 +1,42 @@
+{
+    "name": "sdon2/libretranslate-api",
+    "version": "1.0.0",
+    "description": "API Library for Libretranslate",
+    "keywords": [
+        "php",
+        "libretranslate",
+        "laravel-libretranslate"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saravanakumar Arumugam",
+            "email": "saravanakumar.a.o@gmail.com",
+            "homepage": "https://github.com/sdon2"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LibreTranslateLaravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LibreTranslateLaravel\\LibreTranslateServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
