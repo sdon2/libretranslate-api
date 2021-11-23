@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use LibreTranslateLaravel\LibreTranslateTranslation;
+use LibreTranslateLaravel\LibreTranslateAPI\LibreTranslate;
 
 function is_target_lang($text)
 {
