@@ -2,6 +2,7 @@
 
 namespace LibreTranslateLaravel;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -12,8 +13,12 @@ class LibreTranslateServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/libretranslate.php' => config_path('libretranslate.php'),
+            __DIR__ . '/../config/libretranslate.php' => App::configPath('libretranslate.php'),
         ]);
+
+        $this->publishes([
+            __DIR__ . '/../migrations/create_translations_table.php' => App::databasePath('migrations/' . date('Y_m_d_His', time()) . '_create_translations_table.php'),
+        ], 'migrations');
     }
 
     public function register()
@@ -27,5 +32,7 @@ class LibreTranslateServiceProvider extends ServiceProvider
             $libretranslate->setLogger($logFunction);
             return $libretranslate;
         });
+
+        require_once(__DIR__ . '/../helpers/helpers.php');
     }
 }

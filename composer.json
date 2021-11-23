@@ -27,6 +27,7 @@
     },
     "require": {
         "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
+        "illuminate/database": "^5.8|^6.0|^7.0|^8.0",
         "guzzlehttp/guzzle": "^5.0|^6.5|^7.0"
     },
     "extra": {
