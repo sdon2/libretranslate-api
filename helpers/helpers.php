@@ -40,7 +40,7 @@ function __t($text) {
         } else {
 
             // Translation not found in DB
-            $translator = App:: app(LibreTranslate::class);
+            $translator = app(LibreTranslate::class);
             $translated = $translator->translate($text);
             if ($translated) {
                 LibreTranslateTranslation::create([
