@@ -17,7 +17,7 @@ class LibreTranslateServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/../migrations/create_translations_table.php' => App::databasePath('migrations/' . date('Y_m_d_His', time()) . '_create_translations_table.php'),
+            __DIR__ . '/../migrations/create_libretranslate_translations_table.php' => App::databasePath('migrations/' . date('Y_m_d_His', time()) . '_create_libretranslate_translations_table.php'),
         ], 'migrations');
     }
 

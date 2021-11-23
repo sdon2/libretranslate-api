@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use LibreTranslateLaravel\Translation;
+use LibreTranslateLaravel\LibreTranslateTranslation;
 
-function is_arabic($text)
+function is_target_lang($text)
 {
-    return (preg_match("/\p{Arabic}/u", $text) > 0);
+    $target_lang = Config::get('libretranslate.target_lang_full');
+    return (preg_match("/\p{$target_lang}/u", $text) > 0);
 }
 
 function is_html($text)
@@ -17,21 +19,21 @@ function is_html($text)
 
 function __t($text) {
 
-    if (App::getLocale() !== 'ar' || is_arabic($text) || is_html($text)) {
+    if (App::getLocale() !== Config::get('libretranslate.target_lang') || is_target_lang($text) || is_html($text)) {
         return $text;
     }
 
     $cache = Cache::store('file');
 
     $slug = Str::slug($text, '_');
-    return $cache->get('translation.' . $slug, function () use($text, $cache, $slug) {
+    return $cache->get('libretranslation.' . $slug, function () use($text, $cache, $slug) {
 
         $result = null;
 
         // Translation found in DB
-        if ($translation = Translation::hasTranslation($text)) {
+        if ($translation = LibreTranslateTranslation::hasTranslation($text)) {
             if ($translation->translation_found) {
-                $result = $translation->arabic_text;
+                $result = $translation->translated_text;
             } else {
                 $result = $text;
             }
@@ -41,23 +43,23 @@ function __t($text) {
             $translator = App:: app(LibreTranslate::class);
             $translated = $translator->translate($text);
             if ($translated) {
-                Translation::create([
-                    'english_text' => $text,
-                    'arabic_text' => $translated,
+                LibreTranslateTranslation::create([
+                    'source_text' => $text,
+                    'translated_text' => $translated,
                     'translation_found' => true,
                 ]);
                 $result = $translated;
             } else {
-                Translation::create([
-                    'english_text' => $text,
-                    'arabic_text' => null,
+                LibreTranslateTranslation::create([
+                    'source_text' => $text,
+                    'translated_text' => null,
                     'translation_found' => false,
                 ]);
                 $result = $text;
             }
         }
 
-        $cache->put('translation.' . $slug, $result);
+        $cache->put('libretranslation.' . $slug, $result);
         return $result;
     });
 }

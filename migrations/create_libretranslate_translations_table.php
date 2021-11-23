@@ -13,10 +13,10 @@ class CreateTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('translations', function (Blueprint $table) {
+        Schema::create('libretranslate_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('english_text');
-            $table->text('arabic_text')->nullable();
+            $table->text('source_text');
+            $table->text('translated_text')->nullable();
             $table->boolean('translation_found');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('translations');
+        Schema::dropIfExists('libretranslate_translations');
     }
 }

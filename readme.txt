@@ -8,7 +8,7 @@ composer require sdon2/libretranslate-api
 php artisan vendor:publish
 
 3. Migrate:
-After publishing you must migrate. (Make sure don't have a table named 'translations')
+After publishing you must migrate. (Make sure don't have a table named 'libretranslate_translations')
 
 4. Check configuration in config/libretranslate.php
 

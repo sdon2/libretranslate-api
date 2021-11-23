@@ -4,15 +4,15 @@ namespace LibreTranslateLaravel;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Translation extends Model
+class LibreTranslateTranslation extends Model
 {
-    protected $table = 'translations';
+    protected $table = 'libretranslate_translations';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-    	'english_text',
-    	'arabic_text',
+    	'source_text',
+    	'translated_text',
         'translation_found',
     ];
 
@@ -20,13 +20,13 @@ class Translation extends Model
         'translation_found' => 'boolean',
     ];
 
-    public function setEnglishTextAttribute($value)
+    public function setSourceTextAttribute($value)
     {
-        $this->attributes['english_text'] = trim($value);
+        $this->attributes['source_text'] = trim($value);
     }
 
     public static function hasTranslation($text)
     {
-        return self::query()->where('english_text', trim($text))->first();
+        return self::query()->where('source_text', trim($text))->first();
     }
 }

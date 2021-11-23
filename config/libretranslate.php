@@ -11,6 +11,8 @@ return [
 
     'target_lang' => env('LIBRETRANSLATE_TRAGET_LANG'),
 
+    'target_lang_full' => env('LIBRETRANSLATE_TARGET_LANG_FULL'),
+
     // 'silent' mode disbles throwing exceptions and logs errors
     // 'normal' mode enables throwing exceptions
     'mode' => 'silent',
